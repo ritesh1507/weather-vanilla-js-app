@@ -79,7 +79,7 @@ header{
   margin-left: 50%;
   transform: translateX(-50%);
   max-width: 90%;
-  grid-template-columns: repeat(auto-fit, 8rem);
+  grid-template-columns: repeat(auto-fit, 7rem);
   gap: 1rem;
   padding: 1rem;
 }
@@ -92,7 +92,7 @@ header{
   background-color: rgba(194, 254, 234, 0.414);
   border-radius: 0.4rem;
   box-shadow: 3px 4px rgb(64, 117, 95);
-  padding: 0.5rem;
+  padding: 1.5rem;
 }
 
 .day-card-day{
