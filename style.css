@@ -75,12 +75,13 @@ header{
 .day-section{
   display: grid;
   margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   margin-left: 50%;
   transform: translateX(-50%);
-  max-width: 90%;
-  grid-template-columns: repeat(auto-fit, 7rem);
-  gap: 1rem;
+  width: 50%;
+  grid-template-columns: repeat(auto-fit, 7.4rem);
+  column-gap: 8%;
+  row-gap: 1rem;
   padding: 1rem;
 }
 
@@ -118,4 +119,18 @@ header{
 
 .hour-row>td{
   padding: 0.25rem 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .label { 
+    font-size: 0.5rem; 
+  }
+  .day-section{
+    width: 70%;
+    grid-template-columns: repeat(auto-fit, 7rem);
+    column-gap: 2.4rem;
+  }
+  .header-right{
+    padding-right: 1rem;
+  }
 }
