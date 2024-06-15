@@ -1,9 +1,9 @@
 import axios from "axios"
 
 //https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,weather_code,wind_speed_10m&hourly=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,rain_sum&timeformat=unixtime&timezone=Asia%2FSingapore
-
+//https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,weather_code,wind_speed_10m&hourly=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,rain_sum,wind_speed_10m_max&timeformat=unixtime&timezone=Asia%2FSingapore
 export async function getWeather(lat, lon, timezone){
-    return axios.get("https://api.open-meteo.com/v1/forecast?current=temperature_2m,weather_code,wind_speed_10m&hourly=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,rain_sum&timeformat=unixtime",{
+    return axios.get("https://api.open-meteo.com/v1/forecast?current=temperature_2m,weather_code,wind_speed_10m&hourly=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,rain_sum,wind_speed_10m_max&timeformat=unixtime",{
             params: {
                 latitude: lat,
                 longitude: lon,
@@ -31,6 +31,7 @@ function parseCurrentWeather({current,daily}){
         temperature_2m_min: [minTemp],
         apparent_temperature_max: [maxFeelsLike],
         apparent_temperature_min: [minFeelsLike],
+        wind_speed_10m_max: [dailyWindSpeed],
         rain_sum: [precip],
     } = daily
 
@@ -41,6 +42,7 @@ function parseCurrentWeather({current,daily}){
         maxFeelsLike,
         minFeelsLike,
         windSpeed,
+        dailyWindSpeed,
         precip,
         imageCode,
     }
@@ -52,6 +54,11 @@ function parseDailyWeather({daily}){
             timestamp: time*1000,
             imageCode: daily.weather_code[index],
             maxTemp: daily.temperature_2m_max[index],
+            minTemp: daily.temperature_2m_min[index],
+            maxFeelsLike: daily.apparent_temperature_max[index],
+            minFeelsLike: daily.apparent_temperature_min[index],
+            dailyWindSpeed: daily.wind_speed_10m_max[index],
+            precip: daily.rain_sum[index],
         }
     })
 }

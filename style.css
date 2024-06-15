@@ -94,6 +94,12 @@ header{
   border-radius: 0.4rem;
   box-shadow: 3px 4px rgb(64, 117, 95);
   padding: 1.5rem;
+  cursor: pointer;
+}
+
+.day-card:active{
+  transform: translate(3px, 4px);
+  box-shadow: 0 0;
 }
 
 .day-card-day{

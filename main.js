@@ -43,7 +43,6 @@ function renderCurrentWeather(current){
     setValue("current-fl-low",current.minFeelsLike)
     setValue("current-wind",current.windSpeed)
     setValue("current-precip",current.precip)
-    setValue("current-precip",current.precip)
 
 }
 
@@ -60,10 +59,22 @@ function renderDailyWeather(daily){
         setValue("temp", day.maxTemp, {parent: element})
         setValue("day", DAY_FORMATTER.format(day.timestamp),{parent:element})
         element.querySelector("[data-image]").src = getImageUrl(day.imageCode)
+        element.querySelector(".day-card").addEventListener("click", () => updateHeader(day))
         dailySection.append(element)
         }
         i++;
     })
+}
+
+function updateHeader(day) {
+    setValue("current-temp", day.maxTemp)
+    setValue("current-high", day.maxTemp)
+    setValue("current-low", day.minTemp)
+    setValue("current-fl-high", day.maxFeelsLike)
+    setValue("current-fl-low", day.minFeelsLike)
+    setValue("current-wind", day.dailyWindSpeed)
+    setValue("current-precip", day.precip)
+    currentImage.src = getImageUrl(day.imageCode)
 }
 
 const HOUR_FORMATTER = new Intl.DateTimeFormat(undefined, {hour:"numeric"})
