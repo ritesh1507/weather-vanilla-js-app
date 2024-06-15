@@ -12,6 +12,6 @@
     E("current-fl-low", t.minFeelsLike)
     E("current-wind", t.dailyWindSpeed)
     E("current-precip", t.precip)
-    currentImage.src = getImageUrl(t.imageCode)
+    Un.src = de(t.imageCode)
 }
 const Hn=new Intl.DateTimeFormat(void 0,{hour:"numeric"}),Ce=document.querySelector("[data-hour-section]"),In=document.getElementById("hour-row-template");function Mn(e){Ce.innerHTML="",e.forEach(t=>{const n=In.content.cloneNode(!0);E("temp",t.currentTemp,{parent:n}),E("fl-temp",t.currentFeelsLike,{parent:n}),E("wind",t.windSpeed,{parent:n}),E("precip",t.precip,{parent:n}),E("day",Ye.format(t.timestamp),{parent:n}),E("time",Hn.format(t.timestamp),{parent:n}),n.querySelector("[data-image]").src=de(t.imageCode),Ce.append(n)})}
