@@ -53,12 +53,16 @@ const dayCardTemplate = document.getElementById("day-card-template")
 
 function renderDailyWeather(daily){
     dailySection.innerHTML=""
+    let i=0;
     daily.forEach(day =>{
+        if(i>0){
         const element = dayCardTemplate.content.cloneNode(true)
         setValue("temp", day.maxTemp, {parent: element})
         setValue("day", DAY_FORMATTER.format(day.timestamp),{parent:element})
         element.querySelector("[data-image]").src = getImageUrl(day.imageCode)
         dailySection.append(element)
+        }
+        i++;
     })
 }
 

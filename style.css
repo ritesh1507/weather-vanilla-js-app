@@ -78,8 +78,8 @@ header{
   margin-bottom: 4rem;
   margin-left: 50%;
   transform: translateX(-50%);
-  width: 50%;
-  grid-template-columns: repeat(auto-fit, 7.4rem);
+  width: 35%;
+  grid-template-columns: repeat(3, 7.4rem);
   column-gap: 8%;
   row-gap: 1rem;
   padding: 1rem;
