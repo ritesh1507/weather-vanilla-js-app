@@ -1,7 +1,7 @@
 # Weather App
 
 ## Overview
-This project is a weather application that displays the current, daily, and hourly weather forecasts for a user's location. The application uses geolocation to fetch the user's coordinates and retrieves weather data from the Open-Meteo API. The data is then rendered in a user-friendly interface.
+This project is a weather application that displays the **current**, **daily**, and **hourly** weather forecasts for a user's location. The application uses geolocation to **fetch the user's coordinates** and retrieves weather data from the **Open-Meteo API**. The data is then rendered in a user-friendly interface.
 
 ## Project Structure
 The repository contains the following files:
