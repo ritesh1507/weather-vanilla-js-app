@@ -3,21 +3,25 @@ import axios from "axios"
 //https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,weather_code,wind_speed_10m&hourly=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,rain_sum&timeformat=unixtime&timezone=Asia%2FSingapore
 //https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,weather_code,wind_speed_10m&hourly=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,rain_sum,wind_speed_10m_max&timeformat=unixtime&timezone=Asia%2FSingapore
 export async function getWeather(lat, lon, timezone){
-    return axios.get("https://api.open-meteo.com/v1/forecast?current=temperature_2m,weather_code,wind_speed_10m&hourly=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,rain_sum,wind_speed_10m_max&timeformat=unixtime",{
-            params: {
-                latitude: lat,
-                longitude: lon,
-                timezone,
-            },
+    return axios
+      .get(
+        "https://api.open-meteo.com/v1/forecast?current=temperature_2m,weather_code,wind_speed_10m,is_day&hourly=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,rain_sum,wind_speed_10m_max&timeformat=unixtime",
+        {
+          params: {
+            latitude: lat,
+            longitude: lon,
+            timezone,
+          },
         }
-    // )
-    ).then(({data}) =>{
+        // )
+      )
+      .then(({ data }) => {
         return {
-            current: parseCurrentWeather(data),
-            daily: parseDailyWeather(data),
-            hourly: parseHourlyWeather(data),
-        }
-    })
+          current: parseCurrentWeather(data),
+          daily: parseDailyWeather(data),
+          hourly: parseHourlyWeather(data),
+        };
+      });
 }
 
 function parseCurrentWeather({current,daily}){
@@ -25,6 +29,7 @@ function parseCurrentWeather({current,daily}){
         temperature_2m: currentTemp,
         weather_code: imageCode,
         wind_speed_10m: windSpeed,
+        is_day: dayOrNight,
     } = current 
     const {
         temperature_2m_max: [maxTemp],
@@ -45,6 +50,7 @@ function parseCurrentWeather({current,daily}){
         dailyWindSpeed,
         precip,
         imageCode,
+        dayOrNight,
     }
 }
 
@@ -72,6 +78,7 @@ function parseHourlyWeather({hourly, current}){
             imageCode: hourly.weather_code[index],
             windSpeed: hourly.wind_speed_10m[index],
             precip: hourly.precipitation[index],
+            dayOrNight: hourly.is_day[index],
         }
     }).filter(({timestamp}) => timestamp >= current.time*1000)
 }

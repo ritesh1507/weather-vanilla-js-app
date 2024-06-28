@@ -1,6 +1,6 @@
 export const imageMap = new Map()
 
-addMapping([0,1], "sun")
+addMapping([0,1], "clear")
 addMapping([2], "cloud-sun")
 addMapping([3], "cloud")
 addMapping([45,48], "fog")
